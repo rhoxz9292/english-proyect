@@ -36,6 +36,7 @@
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'float': 'float 6s ease-in-out infinite',
                         'glow': 'glow 3s ease-in-out infinite alternate',
+                        'spin-slow': 'spin 12s linear infinite',
                     },
                     keyframes: {
                         float: {
@@ -122,10 +123,11 @@
                 <a href="#how" class="hover:text-cyan-400 transition-colors">Tecnología</a>
                 <a href="#features" class="hover:text-cyan-400 transition-colors">Características</a>
                 <a href="#pricing" class="hover:text-cyan-400 transition-colors">Precios</a>
+                <a href="#testimonials" class="hover:text-cyan-400 transition-colors">Usuarios</a>
             </div>
 
-            <button class="px-5 py-2 rounded-full border border-cyan-500/30 text-cyan-400 text-sm hover:bg-cyan-500/10 transition-all">
-                Login
+            <button class="px-5 py-2 rounded-full border border-cyan-500/30 text-cyan-400 text-sm hover:bg-cyan-500/10 transition-all flex items-center gap-2">
+                <i data-lucide="user" class="w-4 h-4"></i> Login
             </button>
         </div>
     </nav>
@@ -325,6 +327,66 @@
         </div>
     </section>
 
+    <!-- NUEVO: Sección de Testimonios (Transmisiones) -->
+    <section id="testimonials" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center text-3xl font-bold mb-16">Transmisiones de <span class="text-gradient">Pioneros</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonio 1 -->
+                <div class="glass p-8 rounded-3xl relative">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">
+                            AL
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-white">Alex Larson</h5>
+                            <p class="text-xs text-cyan-400 uppercase tracking-wide">Compositor Digital</p>
+                        </div>
+                        <i data-lucide="quote" class="w-6 h-6 text-white/10 ml-auto"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        "La capacidad de componer melodías simplemente imaginándolas ha cambiado mi flujo de trabajo para siempre. El modo Deep Focus es irreal."
+                    </p>
+                </div>
+
+                <!-- Testimonio 2 -->
+                <div class="glass p-8 rounded-3xl relative border border-purple-500/30">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+                            SK
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-white">Sarah Kim</h5>
+                            <p class="text-xs text-purple-400 uppercase tracking-wide">Beta Tester Nivel 5</p>
+                        </div>
+                        <i data-lucide="quote" class="w-6 h-6 text-white/10 ml-auto"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        "Al principio era escéptica sobre la latencia, pero es instantáneo. Piensas en 'pausa' y la música se detiene antes de que termines el pensamiento."
+                    </p>
+                </div>
+
+                <!-- Testimonio 3 -->
+                <div class="glass p-8 rounded-3xl relative">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">
+                            MD
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-white">Marcus Dev</h5>
+                            <p class="text-xs text-cyan-400 uppercase tracking-wide">Atleta de Alto Rendimiento</p>
+                        </div>
+                        <i data-lucide="quote" class="w-6 h-6 text-white/10 ml-auto"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        "Correr sin tener que tocar mi teléfono o reloj para cambiar la música me mantiene completamente en la zona. Es pura libertad."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Precios -->
     <section id="pricing" class="py-24 relative">
         <!-- Glow background center -->
@@ -375,6 +437,62 @@
                 </div>
 
             </div>
+        </div>
+    </section>
+
+    <!-- NUEVO: Preguntas Frecuentes (FAQ) -->
+    <section class="py-24 bg-black/20">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">Preguntas Frecuentes</h2>
+            
+            <div class="space-y-4">
+                <div class="glass p-6 rounded-2xl cursor-pointer hover:bg-white/5 transition-colors group">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-semibold text-slate-200">¿Es seguro usar NeuraSound todo el día?</h4>
+                        <i data-lucide="chevron-down" class="text-cyan-400 w-5 h-5 group-hover:rotate-180 transition-transform"></i>
+                    </div>
+                    <p class="text-sm text-slate-400 mt-4 leading-relaxed">
+                        Absolutamente. Nuestros sensores son pasivos; solo leen actividad eléctrica, no emiten ninguna señal hacia tu cerebro. Es tan seguro como usar un reloj inteligente.
+                    </p>
+                </div>
+
+                <div class="glass p-6 rounded-2xl cursor-pointer hover:bg-white/5 transition-colors group">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-semibold text-slate-200">¿Funciona con Spotify y Apple Music?</h4>
+                        <i data-lucide="chevron-down" class="text-purple-400 w-5 h-5 group-hover:rotate-180 transition-transform"></i>
+                    </div>
+                    <p class="text-sm text-slate-400 mt-4 leading-relaxed">
+                        Sí. NeuraSound actúa como una capa de control sobre tu sistema operativo. Funciona nativamente con cualquier app de audio en iOS y Android.
+                    </p>
+                </div>
+
+                <div class="glass p-6 rounded-2xl cursor-pointer hover:bg-white/5 transition-colors group">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-semibold text-slate-200">¿Qué pasa si pierdo la concentración?</h4>
+                        <i data-lucide="chevron-down" class="text-cyan-400 w-5 h-5 group-hover:rotate-180 transition-transform"></i>
+                    </div>
+                    <p class="text-sm text-slate-400 mt-4 leading-relaxed">
+                        Nuestra IA distingue entre pensamientos errantes y comandos intencionales. Además, puedes configurar la sensibilidad desde la app para evitar cambios accidentales.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVO: Newsletter / CTA Final -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-cyan-900/10 to-purple-900/10 z-0"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Únete a la <span class="text-gradient">Revolución Neural</span></h2>
+            <p class="text-slate-400 mb-8 max-w-lg mx-auto">Recibe actualizaciones sobre el desarrollo de la V3.0 y acceso anticipado a nuevas funcionalidades.</p>
+            
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" placeholder="tu@correo.com" class="flex-1 px-6 py-4 rounded-full glass bg-black/30 border-white/10 focus:border-cyan-400 outline-none text-white placeholder-slate-500 transition-colors">
+                <button type="button" class="px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-cyan-50 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                    Suscribirse
+                </button>
+            </form>
+            <p class="text-xs text-slate-600 mt-4">Sin spam. Solo ondas cerebrales y buena música.</p>
         </div>
     </section>
 

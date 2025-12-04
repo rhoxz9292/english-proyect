@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuraSound | El Futuro del Audio</title>
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configuración de Tailwind y Estilos Personalizados -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        neura: {
+                            dark: '#0B0F19', // Fondo casi negro
+                            cyan: '#06b6d4', // Cian brillante
+                            purple: '#8b5cf6', // Morado eléctrico
+                            surface: 'rgba(255, 255, 255, 0.03)'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(6, 182, 212, 0.2)' },
+                            '100%': { boxShadow: '0 0 40px rgba(139, 92, 246, 0.4)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B0F19;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Efecto Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(6, 182, 212, 0.3);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        /* Texto Gradiente */
+        .text-gradient {
+            background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Canvas de fondo */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* Utilidad para ocultar scrollbar pero permitir scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-cyan-500 selection:text-white relative">
+
+    <!-- Fondo de Ondas Neuronales -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center glass rounded-b-3xl mt-0 md:mt-4 mx-0 md:mx-4">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-500 flex items-center justify-center">
+                    <i data-lucide="activity" class="text-white w-5 h-5"></i>
+                </div>
+                <span class="text-xl font-bold tracking-wide">Neura<span class="text-cyan-400">Sound</span></span>
+            </div>
+            
+            <div class="hidden md:flex gap-8 text-sm font-light text-slate-300">
+                <a href="#how" class="hover:text-cyan-400 transition-colors">Tecnología</a>
+                <a href="#features" class="hover:text-cyan-400 transition-colors">Características</a>
+                <a href="#pricing" class="hover:text-cyan-400 transition-colors">Precios</a>
+            </div>
+
+            <button class="px-5 py-2 rounded-full border border-cyan-500/30 text-cyan-400 text-sm hover:bg-cyan-500/10 transition-all">
+                Login
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sección Hero -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative pt-20">
+        <!-- Elementos decorativos de fondo (Glows) -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="space-y-6 max-w-4xl z-10 animate-fade-in-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-cyan-300 mb-4">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                </span>
+                Tecnología Neural V 2.0 Disponible
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight">
+                Music Powered <br/>
+                <span class="text-gradient">by Your Mind</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
+                Olvida los botones, las pantallas y la voz. NeuraSound es la primera plataforma inmersiva que traduce tus ondas cerebrales en control auditivo en tiempo real.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <button class="group relative px-8 py-4 rounded-full bg-white text-black font-semibold hover:scale-105 transition-transform overflow-hidden">
+                    <span class="relative z-10">Try Demo</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+                
+                <button class="px-8 py-4 rounded-full glass border border-white/10 text-white hover:bg-white/10 transition-all flex items-center justify-center gap-2 group">
+                    Learn More
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualizador Interactivo / Mockup Concept -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
+            <h2 class="text-sm font-semibold tracking-widest text-cyan-500 uppercase mb-12">La Interfaz NeuraOS</h2>
+            
+            <!-- Contenedor del Mockup -->
+            <div class="relative w-full max-w-5xl h-[500px] md:h-[600px] rounded-3xl glass border border-white/10 p-2 md:p-4 shadow-2xl shadow-cyan-900/20 animate-float">
+                <!-- Marco interno -->
+                <div class="w-full h-full rounded-2xl bg-black/40 overflow-hidden relative flex flex-col">
+                    
+                    <!-- Barra superior Mockup -->
+                    <div class="h-12 border-b border-white/5 flex items-center justify-between px-6">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                        </div>
+                        <div class="text-xs text-slate-500 font-mono tracking-widest">NEURA_SYNC_ACTIVE</div>
+                    </div>
+
+                    <!-- Contenido Mockup -->
+                    <div class="flex-1 flex flex-col md:flex-row">
+                        <!-- Sidebar Mockup -->
+                        <div class="w-full md:w-64 border-r border-white/5 p-6 hidden md:flex flex-col gap-6">
+                            <div class="space-y-4">
+                                <div class="h-2 w-20 bg-slate-700/50 rounded"></div>
+                                <div class="h-2 w-32 bg-slate-800/50 rounded"></div>
+                                <div class="h-2 w-24 bg-slate-800/50 rounded"></div>
+                            </div>
+                            <div class="mt-auto p-4 rounded-xl bg-gradient-to-br from-cyan-900/20 to-purple-900/20 border border-white/5">
+                                <div class="text-xs text-cyan-400 mb-2">Estado Neural</div>
+                                <div class="flex items-end gap-1 h-8">
+                                    <div class="w-1 bg-cyan-500 h-full animate-pulse"></div>
+                                    <div class="w-1 bg-cyan-500 h-2/3 animate-pulse delay-75"></div>
+                                    <div class="w-1 bg-cyan-500 h-3/4 animate-pulse delay-150"></div>
+                                    <div class="w-1 bg-cyan-500 h-1/2 animate-pulse delay-100"></div>
+                                    <div class="w-1 bg-cyan-500 h-full animate-pulse delay-200"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Area Mockup -->
+                        <div class="flex-1 p-8 flex flex-col items-center justify-center relative">
+                            <!-- Círculos concéntricos decorativos -->
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                                <div class="w-64 h-64 border border-cyan-500/30 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                                <div class="w-96 h-96 border border-purple-500/20 rounded-full absolute animate-[spin_15s_linear_infinite_reverse]"></div>
+                            </div>
+
+                            <!-- "Album Art" abstracto -->
+                            <div class="w-48 h-48 rounded-full bg-gradient-to-tr from-cyan-600 to-purple-600 shadow-[0_0_50px_rgba(34,211,238,0.3)] flex items-center justify-center mb-8 relative z-10">
+                                <i data-lucide="music" class="w-16 h-16 text-white opacity-80"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-light text-white mb-2">Deep Focus Alpha</h3>
+                            <p class="text-cyan-400/80 text-sm tracking-wide mb-8">Generated by Cortex-V3</p>
+
+                            <!-- Controles mentales visuales -->
+                            <div class="flex items-center gap-12 text-slate-500">
+                                <i data-lucide="skip-back" class="w-6 h-6"></i>
+                                <div class="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-cyan-400">
+                                    <i data-lucide="brain-circuit" class="w-8 h-8 animate-pulse"></i>
+                                </div>
+                                <i data-lucide="skip-forward" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cómo Funciona -->
+    <section id="how" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Sincronización <span class="text-gradient">Sin Esfuerzo</span></h2>
+                <p class="text-slate-400 max-w-xl mx-auto">Tres pasos para liberar tu mente del hardware tradicional.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Paso 1 -->
+                <div class="glass glass-hover p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 font-bold text-6xl group-hover:text-cyan-400 transition-colors">01</div>
+                    <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
+                        <i data-lucide="headphones" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Colocación del Halo</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Nuestro dispositivo Halo ultraligero se ajusta cómodamente. Los sensores secos de grafeno detectan actividad sin necesidad de gel ni cables.
+                    </p>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="glass glass-hover p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 font-bold text-6xl group-hover:text-purple-400 transition-colors">02</div>
+                    <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 mb-6">
+                        <i data-lucide="wifi" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Calibración Neural</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        En 10 segundos, NeuraSound crea un mapa topográfico de tus ondas alfa y beta para entender tus patrones únicos de pensamiento.
+                    </p>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="glass glass-hover p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 font-bold text-6xl group-hover:text-cyan-400 transition-colors">03</div>
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 flex items-center justify-center text-white mb-6">
+                        <i data-lucide="play" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Control Mental</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Piensa en "Siguiente" para cambiar de canción. Enfócate para subir el volumen. Relájate para pausar. La música fluye contigo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Características -->
+    <section id="features" class="py-24 bg-black/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4">Especificaciones <br/><span class="text-slate-500">del Futuro</span></h2>
+                </div>
+                <button class="text-cyan-400 hover:text-cyan-300 flex items-center gap-2 text-sm uppercase tracking-widest font-semibold">
+                    Ver ficha técnica completa <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass p-6 rounded-2xl border-t border-cyan-500/50">
+                    <i data-lucide="zap" class="w-8 h-8 text-cyan-400 mb-4"></i>
+                    <h4 class="font-semibold mb-2">Latencia Cero</h4>
+                    <p class="text-xs text-slate-400">Procesamiento local en el chip N-Core para una respuesta instantánea de < 5ms.</p>
+                </div>
+                <div class="glass p-6 rounded-2xl">
+                    <i data-lucide="battery" class="w-8 h-8 text-purple-400 mb-4"></i>
+                    <h4 class="font-semibold mb-2">48h de Autonomía</h4>
+                    <p class="text-xs text-slate-400">Batería de estado sólido que dura semanas en modo espera y 2 días en uso continuo.</p>
+                </div>
+                <div class="glass p-6 rounded-2xl">
+                    <i data-lucide="bluetooth" class="w-8 h-8 text-cyan-400 mb-4"></i>
+                    <h4 class="font-semibold mb-2">Conectividad Cuántica</h4>
+                    <p class="text-xs text-slate-400">Compatible con cualquier sistema de sonido Bluetooth 7.0 o superior.</p>
+                </div>
+                <div class="glass p-6 rounded-2xl">
+                    <i data-lucide="shield-check" class="w-8 h-8 text-purple-400 mb-4"></i>
+                    <h4 class="font-semibold mb-2">Privacidad Total</h4>
+                    <p class="text-xs text-slate-400">Tus datos neuronales se encriptan localmente y nunca salen del dispositivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Precios -->
+    <section id="pricing" class="py-24 relative">
+        <!-- Glow background center -->
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-3xl bg-gradient-to-b from-cyan-500/5 to-purple-500/5 blur-3xl -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center text-4xl font-bold mb-16">Elige tu Nivel de Conexión</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- Plan 1 -->
+                <div class="glass p-8 rounded-3xl border border-white/5 flex flex-col">
+                    <div class="mb-4">
+                        <span class="text-cyan-400 text-sm font-bold tracking-widest uppercase">Neura Halo</span>
+                        <h3 class="text-3xl font-bold mt-2">Dispositivo</h3>
+                    </div>
+                    <div class="text-5xl font-light mb-6">$299</div>
+                    <p class="text-slate-400 text-sm mb-8">Pago único. Incluye el headset Halo de primera generación y acceso básico a la app.</p>
+                    
+                    <ul class="space-y-3 mb-8 text-sm text-slate-300 flex-1">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-500"></i> NeuraSound Halo Headset</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-500"></i> Estuche de carga inalámbrica</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-500"></i> App Básica (Control de música)</li>
+                    </ul>
+                    
+                    <button class="w-full py-3 rounded-xl border border-white/20 hover:bg-white/5 transition-colors text-sm font-semibold">Reservar Ahora</button>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="glass p-8 rounded-3xl border border-purple-500/30 relative flex flex-col bg-purple-500/5">
+                    <div class="absolute top-0 right-0 bg-purple-600 text-white text-xs px-3 py-1 rounded-bl-xl rounded-tr-2xl font-bold">RECOMENDADO</div>
+                    
+                    <div class="mb-4">
+                        <span class="text-purple-400 text-sm font-bold tracking-widest uppercase">Halo + NeuraLink Pro</span>
+                        <h3 class="text-3xl font-bold mt-2">Pack Completo</h3>
+                    </div>
+                    <div class="text-5xl font-light mb-6">$349 <span class="text-lg text-slate-500">+ $10/mes</span></div>
+                    <p class="text-slate-400 text-sm mb-8">El dispositivo con la suscripción a nuestra IA generativa de música.</p>
+                    
+                    <ul class="space-y-3 mb-8 text-sm text-slate-300 flex-1">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-400"></i> Todo lo incluido en Halo</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-400"></i> Música generada por IA en tiempo real</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-400"></i> Modos de concentración profunda</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-400"></i> Estadísticas de salud mental</li>
+                    </ul>
+                    
+                    <button class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-600 hover:opacity-90 transition-opacity text-sm font-semibold shadow-lg shadow-purple-900/50">Comenzar Suscripción</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 bg-black">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-4">
+                    <i data-lucide="activity" class="text-cyan-500 w-5 h-5"></i>
+                    <span class="text-xl font-bold text-white">NeuraSound</span>
+                </div>
+                <p class="text-slate-500 text-sm max-w-xs">
+                    Redefiniendo la interacción humano-máquina a través del lenguaje universal de la música.
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-semibold mb-4">Plataforma</h4>
+                <ul class="space-y-2 text-sm text-slate-400">
+                    <li><a href="#" class="hover:text-cyan-400 transition-colors">Tecnología</a></li>
+                    <li><a href="#" class="hover:text-cyan-400 transition-colors">Ciencia</a></li>
+                    <li><a href="#" class="hover:text-cyan-400 transition-colors">Seguridad</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-semibold mb-4">Compañía</h4>
+                <ul class="space-y-2 text-sm text-slate-400">
+                    <li><a href="#" class="hover:text-cyan-400 transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#" class="hover:text-cyan-400 transition-colors">Carreras</a></li>
+                    <li><a href="#" class="hover:text-cyan-400 transition-colors">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/5 text-center text-xs text-slate-600">
+            &copy; 2042 NeuraSound Technologies. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- Scripts para Interactividad -->
+    <script>
+        // Inicializar Iconos Lucide
+        lucide.createIcons();
+
+        // Canvas Animation - Ondas Cerebrales
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let waves = [];
+        
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initWaves();
+        }
+        
+        function initWaves() {
+            waves = [];
+            const waveCount = 5;
+            for(let i = 0; i < waveCount; i++) {
+                waves.push({
+                    y: height / 2,
+                    length: 0.005 + Math.random() * 0.005,
+                    amplitude: 50 + Math.random() * 100,
+                    frequency: 0.01 + Math.random() * 0.02,
+                    speed: 0.05 + Math.random() * 0.05,
+                    offset: Math.random() * Math.PI * 2,
+                    color: i % 2 === 0 ? 'rgba(6, 182, 212, 0.1)' : 'rgba(139, 92, 246, 0.1)'
+                });
+            }
+        }
+        
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            
+            waves.forEach(wave => {
+                ctx.beginPath();
+                ctx.moveTo(0, wave.y);
+                
+                for(let x = 0; x < width; x++) {
+                    const y = wave.y + Math.sin(x * wave.length + wave.offset) * wave.amplitude * Math.sin(wave.offset * 0.5);
+                    ctx.lineTo(x, y);
+                }
+                
+                ctx.strokeStyle = wave.color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                wave.offset += wave.speed;
+            });
+            
+            requestAnimationFrame(draw);
+        }
+        
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+    </script>
+</body>
+</html>
